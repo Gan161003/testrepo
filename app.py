@@ -806,12 +806,43 @@ if st.button("Fetch Reddit Data"):
 
     with st.spinner("Fetching Reddit Posts and Comments..."):
 
+        # response = requests.get(
+        #     SEARCH_URL,
+        #     headers=HEADERS
+        # )
+
+        # data = response.json()
         response = requests.get(
             SEARCH_URL,
-            headers=HEADERS
+            headers=HEADERS,
+            timeout=30
         )
-
-        data = response.json()
+        
+        # =========================================================
+        # RESPONSE VALIDATION
+        # =========================================================
+        
+        if response.status_code != 200:
+        
+            st.error(f"Reddit API Error: {response.status_code}")
+            st.text(response.text)
+            st.stop()
+        
+        # =========================================================
+        # JSON VALIDATION
+        # =========================================================
+        
+        try:
+        
+            data = response.json()
+        
+        except Exception as e:
+        
+            st.error("Failed to decode Reddit response.")
+        
+            st.text(response.text[:1000])
+        
+            st.stop()
 
         posts = data["data"]["children"]
 
