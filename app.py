@@ -799,12 +799,19 @@ if st.button("Fetch Reddit Data"):
             )
         }
 
+    # SEARCH_URL = (
+    #     f"https://www.reddit.com/search.json?"
+    #     f"q={keyword}"
+    #     f"&sort={sort_option}"
+    #     f"&limit={limit}"
+    # )
     SEARCH_URL = (
-        f"https://www.reddit.com/search.json?"
-        f"q={keyword}"
-        f"&sort={sort_option}"
-        f"&limit={limit}"
-    )
+    f"https://api.reddit.com/search?"
+    f"q={keyword}"
+    f"&sort={sort_option}"
+    f"&limit={limit}"
+ )
+ 
 
     # =========================================================
     # FETCH DATA
@@ -905,8 +912,11 @@ if st.button("Fetch Reddit Data"):
                 # COMMENTS API
                 # =========================================================
 
+                # comments_url = (
+                #     f"https://www.reddit.com/comments/{post_id}.json"
+                # )
                 comments_url = (
-                    f"https://www.reddit.com/comments/{post_id}.json"
+                    f"https://api.reddit.com/comments/{post_id}"
                 )
 
                 # comments_response = requests.get(
