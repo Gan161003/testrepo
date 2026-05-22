@@ -903,12 +903,30 @@ if st.button("Fetch Reddit Data"):
                     f"https://www.reddit.com/comments/{post_id}.json"
                 )
 
+                # comments_response = requests.get(
+                #     comments_url,
+                #     headers=HEADERS
+                # )
+
+                # comments_data = comments_response.json()
                 comments_response = requests.get(
                     comments_url,
-                    headers=HEADERS
+                    headers=HEADERS,
+                    timeout=30
                 )
-
-                comments_data = comments_response.json()
+                
+                # Skip bad responses
+                if comments_response.status_code != 200:
+                
+                    continue
+                
+                try:
+                
+                    comments_data = comments_response.json()
+                
+                except:
+                
+                    continue
 
                 comments = comments_data[1]["data"]["children"]
 
