@@ -796,7 +796,8 @@ if st.button("Fetch Reddit Data"):
                 "AppleWebKit/537.36 "
                 "(KHTML, like Gecko) "
                 "Chrome/122.0.0.0 Safari/537.36"
-            )
+            ),
+            "Accept": "application/json"
         }
 
     # SEARCH_URL = (
